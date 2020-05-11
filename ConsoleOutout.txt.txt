@@ -1,0 +1,104 @@
+Started by user Kristian Hajdari
+Running in Durability level: MAX_SURVIVABILITY
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in /var/lib/jenkins/workspace/Quiz2_pipeline
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Git clone)
+[Pipeline] git
+No credentials specified
+ > /usr/bin/git rev-parse --is-inside-work-tree # timeout=10
+Fetching changes from the remote Git repository
+ > /usr/bin/git config remote.origin.url https://github.com/sefremidis/Quiz2_MathApp.git # timeout=10
+Fetching upstream changes from https://github.com/sefremidis/Quiz2_MathApp.git
+ > /usr/bin/git --version # timeout=10
+ > /usr/bin/git fetch --tags --progress -- https://github.com/sefremidis/Quiz2_MathApp.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > /usr/bin/git rev-parse refs/remotes/origin/master^{commit} # timeout=10
+ > /usr/bin/git rev-parse refs/remotes/origin/origin/master^{commit} # timeout=10
+Checking out Revision cc5b2c9ed9c37741aa40eb64533a05d936439989 (refs/remotes/origin/master)
+ > /usr/bin/git config core.sparsecheckout # timeout=10
+ > /usr/bin/git checkout -f cc5b2c9ed9c37741aa40eb64533a05d936439989 # timeout=10
+ > /usr/bin/git branch -a -v --no-abbrev # timeout=10
+ > /usr/bin/git branch -D master # timeout=10
+ > /usr/bin/git checkout -b master cc5b2c9ed9c37741aa40eb64533a05d936439989 # timeout=10
+Commit message: "Initial commit."
+ > /usr/bin/git rev-list --no-walk cc5b2c9ed9c37741aa40eb64533a05d936439989 # timeout=10
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Build)
+[Pipeline] sh
++ mvn -B -DskipTests clean package
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] -----------------< gr.CCP6418.Quiz2:gr.CCP6418.Quiz2 >------------------
+[INFO] Building Quiz2 code base 0.0.1-SNAPSHOT
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:2.5:clean (default-clean) @ gr.CCP6418.Quiz2 ---
+[INFO] Deleting /var/lib/jenkins/workspace/Quiz2_pipeline/target
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ gr.CCP6418.Quiz2 ---
+[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+[INFO] skip non existing resourceDirectory /var/lib/jenkins/workspace/Quiz2_pipeline/src/main/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.1:compile (default-compile) @ gr.CCP6418.Quiz2 ---
+[INFO] Changes detected - recompiling the module!
+[WARNING] File encoding has not been set, using platform encoding UTF-8, i.e. build is platform dependent!
+[INFO] Compiling 1 source file to /var/lib/jenkins/workspace/Quiz2_pipeline/target/classes
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ gr.CCP6418.Quiz2 ---
+[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+[INFO] skip non existing resourceDirectory /var/lib/jenkins/workspace/Quiz2_pipeline/src/test/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.1:testCompile (default-testCompile) @ gr.CCP6418.Quiz2 ---
+[INFO] Changes detected - recompiling the module!
+[WARNING] File encoding has not been set, using platform encoding UTF-8, i.e. build is platform dependent!
+[INFO] Compiling 1 source file to /var/lib/jenkins/workspace/Quiz2_pipeline/target/test-classes
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.12.4:test (default-test) @ gr.CCP6418.Quiz2 ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- maven-jar-plugin:2.4:jar (default-jar) @ gr.CCP6418.Quiz2 ---
+[INFO] Building jar: /var/lib/jenkins/workspace/Quiz2_pipeline/target/gr.CCP6418.Quiz2-0.0.1-SNAPSHOT.jar
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  02:03 min
+[INFO] Finished at: 2020-05-11T15:52:28Z
+[INFO] ------------------------------------------------------------------------
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Execute app)
+[Pipeline] sh
++ java -cp target/gr.CCP6418.Quiz2-0.0.1-SNAPSHOT.jar:dir/* MathApp
+The First 15 primes are:
+Prime #1 is 2
+Prime #2 is 3
+Prime #3 is 5
+Prime #4 is 7
+Prime #5 is 11
+Prime #6 is 13
+Prime #7 is 17
+Prime #8 is 19
+Prime #9 is 23
+Prime #10 is 29
+Prime #11 is 31
+Prime #12 is 37
+Prime #13 is 41
+Prime #14 is 43
+Prime #15 is 47
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Declarative: Post Actions)
+[Pipeline] echo
+Execute when run is successful.
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS
